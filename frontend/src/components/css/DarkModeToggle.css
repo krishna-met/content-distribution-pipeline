@@ -1,0 +1,115 @@
+/* DarkModeToggle.css */
+.dark-mode-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+}
+
+.toggle-label {
+  display: block;
+  width: 60px;
+  height: 30px;
+  background: var(--toggle-bg, #ccc);
+  border-radius: 15px;
+  cursor: pointer;
+  position: relative;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 2px 8px var(--shadow);
+}
+
+.toggle-label:hover {
+  background: var(--toggle-bg-hover, #bbb);
+}
+
+#dark-mode-checkbox {
+  display: none;
+}
+
+.toggle-slider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  background: white;
+  border-radius: 50%;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  transition: transform 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+#dark-mode-checkbox:checked + .toggle-label {
+  background: var(--button-bg);
+}
+
+#dark-mode-checkbox:checked + .toggle-label:hover {
+  background: var(--button-bg-hover, #4080d0);
+}
+
+#dark-mode-checkbox:checked + .toggle-label .toggle-slider {
+  transform: translateX(30px);
+  background: #f0f8ff;
+}
+
+.icon {
+  font-size: 14px;
+  position: absolute;
+  transition: opacity 0.3s ease;
+}
+
+.sun {
+  opacity: 1;
+}
+
+.moon {
+  opacity: 0;
+}
+
+#dark-mode-checkbox:checked + .toggle-label .sun {
+  opacity: 0;
+}
+
+#dark-mode-checkbox:checked + .toggle-label .moon {
+  opacity: 1;
+}
+
+/* Enhanced CSS variables for better theming */
+:root {
+  --bg-color: #ffffff;
+  --text-color: #333333;
+  --border-color: #e0e0e0;
+  --card-bg: #f9f9f9;
+  --button-bg: #4a90e2;
+  --button-bg-hover: #357abd;
+  --shadow: rgba(0, 0, 0, 0.1);
+  --success-color: #28a745;
+  --warning-color: #ffc107;
+  --error-color: #dc3545;
+  --toggle-bg: #ccc;
+  --toggle-bg-hover: #bbb;
+}
+
+[data-theme="dark"] {
+  --bg-color: #1a1a1a;
+  --text-color: #ffffff;
+  --border-color: #404040;
+  --card-bg: #2d2d2d;
+  --button-bg: #5ba0f2;
+  --button-bg-hover: #4080d0;
+  --shadow: rgba(255, 255, 255, 0.1);
+  --success-color: #40d158;
+  --warning-color: #ffcc33;
+  --error-color: #ff453a;
+  --toggle-bg: #555;
+  --toggle-bg-hover: #666;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+}

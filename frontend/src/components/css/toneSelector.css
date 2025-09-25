@@ -1,0 +1,266 @@
+/* Enhanced ToneSelector.css with offline support */
+.tone-selector {
+  margin-bottom: 1.5rem;
+}
+
+.tone-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.tone-label {
+  font-weight: 600;
+  color: var(--text-color);
+  margin: 0;
+}
+
+.server-status {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.server-status.checking {
+  background: rgba(255, 193, 7, 0.1);
+  color: var(--warning-color);
+}
+
+.server-status.online {
+  background: rgba(40, 167, 69, 0.1);
+  color: var(--success-color);
+}
+
+.server-status.offline {
+  background: rgba(220, 53, 69, 0.1);
+  color: var(--error-color);
+}
+
+.status-icon {
+  font-size: 1rem;
+}
+
+.status-text {
+  font-weight: 500;
+}
+
+.retry-button {
+  background: var(--error-color);
+  color: white;
+  border: none;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.75rem;
+  transition: background-color 0.3s ease;
+}
+
+.retry-button:hover:not(:disabled) {
+  background: #c82333;
+}
+
+.retry-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.tone-info {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  border-radius: 6px;
+  margin-bottom: 0.75rem;
+  font-size: 0.875rem;
+}
+
+.offline-info {
+  background: rgba(74, 144, 226, 0.1);
+  border: 1px solid rgba(74, 144, 226, 0.3);
+}
+
+.info-icon {
+  font-size: 1.25rem;
+  flex-shrink: 0;
+}
+
+.info-content {
+  flex: 1;
+}
+
+.info-title {
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+  color: var(--text-color);
+}
+
+.info-description {
+  color: var(--text-color);
+  opacity: 0.9;
+  line-height: 1.4;
+}
+
+.dev-instructions {
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  font-family: monospace;
+  font-size: 0.8rem;
+}
+
+.dev-instructions code {
+  background: rgba(0, 0, 0, 0.2);
+  padding: 0.125rem 0.25rem;
+  border-radius: 3px;
+}
+
+.tone-select-wrapper {
+  position: relative;
+}
+
+.tone-select {
+  width: 100%;
+  padding: 0.75rem;
+  border: 2px solid var(--border-color);
+  border-radius: 8px;
+  background-color: var(--card-bg);
+  color: var(--text-color);
+  font-size: 1rem;
+  cursor: pointer;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.tone-select:focus {
+  outline: none;
+  border-color: var(--button-bg);
+  box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+}
+
+.tone-select:hover {
+  border-color: var(--button-bg);
+}
+
+.tone-description {
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--text-color);
+  opacity: 0.8;
+  font-style: italic;
+}
+
+/* Debug panel styling */
+.debug-panel {
+  margin-top: 1rem;
+  font-size: 0.8rem;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.debug-panel details {
+  background: var(--card-bg);
+}
+
+.debug-panel summary {
+  cursor: pointer;
+  user-select: none;
+  font-weight: 600;
+  padding: 0.5rem 0.75rem;
+  background: rgba(74, 144, 226, 0.1);
+  border-bottom: 1px solid var(--border-color);
+  transition: background-color 0.3s ease;
+}
+
+.debug-panel summary:hover {
+  background: rgba(74, 144, 226, 0.2);
+}
+
+.debug-content {
+  padding: 0.75rem;
+}
+
+.debug-row {
+  display: flex;
+  margin-bottom: 0.5rem;
+  font-family: monospace;
+}
+
+.debug-row strong {
+  min-width: 120px;
+  margin-right: 0.5rem;
+}
+
+.api-urls {
+  margin-left: 120px;
+  font-size: 0.75rem;
+  color: var(--text-color);
+  opacity: 0.7;
+}
+
+.debug-actions {
+  margin-top: 0.75rem;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.debug-actions button {
+  background: var(--button-bg);
+  color: white;
+  border: none;
+  padding: 0.375rem 0.75rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.75rem;
+  transition: background-color 0.3s ease;
+}
+
+.debug-actions button:hover:not(:disabled) {
+  background: var(--button-bg-hover);
+}
+
+.debug-actions button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Loading animation */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.server-status.checking .status-icon {
+  animation: spin 1s linear infinite;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .tone-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
+  }
+
+  .server-status {
+    justify-content: center;
+  }
+
+  .debug-row {
+    flex-direction: column;
+  }
+
+  .debug-row strong {
+    min-width: auto;
+    margin-bottom: 0.25rem;
+  }
+
+  .api-urls {
+    margin-left: 0;
+  }
+}
