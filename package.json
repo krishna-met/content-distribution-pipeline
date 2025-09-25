@@ -60,7 +60,7 @@
   },
   "scripts": {
     "start": "node dist/backend/server.js",
-    "build": "tsc --project backend/tsconfig.json",
+    "build": "cd frontend && yarn build",
     "dev:backend": "nodemon --exec ts-node backend/server.ts",
     "dev:frontend": "cd frontend && pnpm run dev",
     "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
