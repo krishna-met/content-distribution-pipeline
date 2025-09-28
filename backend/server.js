@@ -1,4 +1,4 @@
-// Enhanced server.js with tone selection support
+// Enhanced server.js with tone selection support AND React frontend serving
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
@@ -31,6 +31,12 @@ app.use(cors({
 }));
 
 app.use(express.json());
+
+// ✅ SERVE STATIC FILES FROM REACT BUILD (Add this section)
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, '../frontend/dist')));
+  console.log(`📁 Serving static files from: ${path.join(__dirname, '../frontend/dist')}`);
+}
 
 // Health check endpoint
 app.get('/api/health', (req, res) => {
@@ -181,20 +187,28 @@ app.post('/api/content/process-content', (req, res) => {
   return app._router.handle(req, res);
 });
 
-// 404 handler
-app.use('*', (req, res) => {
-  res.status(404).json({
-    success: false,
-    error: 'Endpoint not found',
-    path: req.originalUrl,
-    availableEndpoints: [
-      'GET /api/health',
-      'GET /api/content/tones',
-      'POST /api/content/process',
-      'POST /api/content/batch-process'
-    ]
+// ✅ SERVE REACT APP FOR ALL NON-API ROUTES (Add this section - IMPORTANT: Must be before 404 handler)
+if (process.env.NODE_ENV === 'production') {
+  app.get('*', (req, res) => {
+    console.log(`🌐 Serving React app for route: ${req.url}`);
+    res.sendFile(path.join(__dirname, '../frontend/dist/index.html'));
   });
-});
+} else {
+  // ✅ MODIFIED: Only show 404 handler in development mode
+  app.use('*', (req, res) => {
+    res.status(404).json({
+      success: false,
+      error: 'Endpoint not found',
+      path: req.originalUrl,
+      availableEndpoints: [
+        'GET /api/health',
+        'GET /api/content/tones',
+        'POST /api/content/process',
+        'POST /api/content/batch-process'
+      ]
+    });
+  });
+}
 
 // Enhanced global error handler
 app.use((error, req, res, next) => {
@@ -219,4 +233,9 @@ app.listen(PORT, () => {
   console.log(`🔧 Environment: ${process.env.NODE_ENV || 'development'}`);
   console.log(`🤖 Perplexity AI: ${perplexityApiKey ? '✅ Configured' : '❌ Not configured'}`);
   console.log(`✨ Features: Tone Selection, AI Hashtags, Multi-Platform, Batch Processing`);
+  
+  if (process.env.NODE_ENV === 'production') {
+    console.log(`🌐 Serving React frontend from: ../frontend/dist`);
+    console.log(`🎯 Frontend available at: http://localhost:${PORT}/`);
+  }
 });
