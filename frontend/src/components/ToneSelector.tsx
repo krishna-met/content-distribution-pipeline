@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import 'src/components/css/ToneSelector.css';
+import './css/toneSelector.css';
 
 interface ToneSelectorProps {
   selectedTone: string;
