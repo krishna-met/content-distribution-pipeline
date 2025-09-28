@@ -36,7 +36,7 @@ const ToneSelector: React.FC<ToneSelectorProps> = ({ selectedTone, onToneChange 
 
         // Check if we're in development and backend might not be running
         const apiUrl = process.env.NODE_ENV === 'development' 
-          ? 'http://localhost:3000/api/content/tones'  // Adjust port as needed
+          ? 'https://content-distribution-pipeline.onrender.com/api/content/tones'  // Adjust port as needed
           : '/api/content/tones';
 
         console.log('Fetching tones from:', apiUrl);
