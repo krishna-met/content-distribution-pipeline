@@ -78,7 +78,7 @@ const Index: React.FC = () => {
     toast.loading(`Processing content for ${selectedPlatforms.length} platform${selectedPlatforms.length > 1 ? 's' : ''}...`, { id: 'processing' });
 
     try {
-      const response = await fetch('http://localhost:3000/api/content/process', {
+      const response = await fetch('https://content-distribution-pipeline.onrender.com/api/content/process', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 
